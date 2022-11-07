@@ -1,0 +1,35 @@
+# Dies ist ein grundlegender Workflow, der Ihnen den Einstieg in Aktionen erleichtert.
+name: Node CI
+# Steuert, wann der Workflow ausgeführt wird
+on:
+# Löst den Workflow bei Push- oder Pull-Anforderungsereignissen aus, jedoch nur für den "Hauptzweig"
+
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Ermöglicht das manuelle Ausführen dieses Workflows über die Registerkarte "Aktionen
+  workflow_dispatch:
+
+# Ein Workflowlauf besteht aus einem oder mehreren Aufträgen, die sequentiell oder parallel ausgeführt werden können
+jobs:
+  # Dieser Workflow enthält einen einzelnen Job namens "build"
+  build:
+    # Die Art des Läufers, auf dem der Job ausgeführt wird
+    runs-on: ubuntu-latest
+
+    # Schritte stellen eine Abfolge von Aufgaben dar, die als Teil des Auftrags ausgeführt werden
+    steps:
+      # Checkt Ihr Repository unter $GITHUB_WORKSPACE aus, damit Ihr Job darauf zugreifen kann
+      - uses: actions/checkout@v3
+
+      # Führt einen einzelnen Befehl mit der Runners-Shell aus
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Führt eine Reihe von Befehlen mit der Runners-Shell aus
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
